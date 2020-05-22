@@ -164,7 +164,7 @@ public class DormBuildServlet extends HttpServlet{
 		try {
 			con = dbUtil.getCon();
 			if(dormBuildDao.existManOrDormWithId(con, dormBuildId)) {
-				request.setAttribute("error", "错误");
+				request.setAttribute("error", "删除失败");
 			} else {
 				dormBuildDao.dormBuildDelete(con, dormBuildId);
 			}
@@ -181,7 +181,7 @@ public class DormBuildServlet extends HttpServlet{
 	}
 
 	private void dormBuildSave(HttpServletRequest request,
-			HttpServletResponse response)throws ServletException, IOException {
+			HttpServletResponse response) {
 		String dormBuildId = request.getParameter("dormBuildId");
 		String dormBuildName = request.getParameter("dormBuildName");
 		String detail = request.getParameter("detail");
@@ -192,7 +192,7 @@ public class DormBuildServlet extends HttpServlet{
 		Connection con = null;
 		try {
 			con = dbUtil.getCon();
-			int saveNum = 0;
+			int saveNum;
 			if(StringUtil.isNotEmpty(dormBuildId)) {
 				saveNum = dormBuildDao.dormBuildUpdate(con, dormBuild);
 			} else {
@@ -202,7 +202,7 @@ public class DormBuildServlet extends HttpServlet{
 				request.getRequestDispatcher("dormBuild?action=list").forward(request, response);
 			} else {
 				request.setAttribute("dormBuild", dormBuild);
-				request.setAttribute("error", "错误");
+				request.setAttribute("error", "保存失败");
 				request.setAttribute("mainPage", "dormBuild/dormBuildSave.jsp");
 				request.getRequestDispatcher("mainAdmin.jsp").forward(request, response);
 			}
@@ -242,29 +242,29 @@ public class DormBuildServlet extends HttpServlet{
 
 	private String genPagation(int totalNum, int currentPage, int pageSize){
 		int totalPage = totalNum%pageSize==0?totalNum/pageSize:totalNum/pageSize+1;
-		StringBuffer pageCode = new StringBuffer();
-		pageCode.append("<li><a href='dormBuild?page=1'>��ҳ</a></li>");
+		StringBuilder pageCode = new StringBuilder();
+		pageCode.append("<li><a href='dormBuild?page=1'>首页</a></li>");
 		if(currentPage==1) {
-			pageCode.append("<li class='disabled'><a href='#'>��һҳ</a></li>");
+			pageCode.append("<li class='disabled'><a href='#'>上一页</a></li>");
 		}else {
-			pageCode.append("<li><a href='dormBuild?page="+(currentPage-1)+"'>��һҳ</a></li>");
+			pageCode.append("<li><a href='dormBuild?page=").append(currentPage - 1).append("'>上一页</a></li>");
 		}
 		for(int i=currentPage-2;i<=currentPage+2;i++) {
 			if(i<1||i>totalPage) {
 				continue;
 			}
 			if(i==currentPage) {
-				pageCode.append("<li class='active'><a href='#'>"+i+"</a></li>");
+				pageCode.append("<li class='active'><a href='#'>").append(i).append("</a></li>");
 			} else {
-				pageCode.append("<li><a href='dormBuild?page="+i+"'>"+i+"</a></li>");
+				pageCode.append("<li><a href='dormBuild?page=").append(i).append("'>").append(i).append("</a></li>");
 			}
 		}
 		if(currentPage==totalPage) {
-			pageCode.append("<li class='disabled'><a href='#'>��һҳ</a></li>");
+			pageCode.append("<li class='disabled'><a href='#'>下一页</a></li>");
 		} else {
-			pageCode.append("<li><a href='dormBuild?page="+(currentPage+1)+"'>��һҳ</a></li>");
+			pageCode.append("<li><a href='dormBuild?page=").append(currentPage + 1).append("'>下一页</a></li>");
 		}
-		pageCode.append("<li><a href='dormBuild?page="+totalPage+"'>βҳ</a></li>");
+		pageCode.append("<li><a href='dormBuild?page=").append(totalPage).append("'>尾页</a></li>");
 		return pageCode.toString();
 	}
 	

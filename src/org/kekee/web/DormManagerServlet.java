@@ -41,7 +41,7 @@ public class DormManagerServlet extends HttpServlet{
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
-		String s_dormManagerText = request.getParameter("s_dormManagerText");
+		String sDormManagerText = request.getParameter("s_dormManagerText");
 		String searchType = request.getParameter("searchType");
 		String page = request.getParameter("page");
 		String action = request.getParameter("action");
@@ -57,47 +57,47 @@ public class DormManagerServlet extends HttpServlet{
 			return;
 		} else 
 			if("list".equals(action)) {
-			if(StringUtil.isNotEmpty(s_dormManagerText)) {
+			if(StringUtil.isNotEmpty(sDormManagerText)) {
 				if("name".equals(searchType)) {
-					dormManager.setName(s_dormManagerText);
+					dormManager.setName(sDormManagerText);
 				} else if("userName".equals(searchType)) {
-					dormManager.setUserName(s_dormManagerText);
+					dormManager.setUserName(sDormManagerText);
 				}
 			}
 			session.removeAttribute("s_dormManagerText");
 			session.removeAttribute("searchType");
-			request.setAttribute("s_dormManagerText", s_dormManagerText);
+			request.setAttribute("s_dormManagerText", sDormManagerText);
 			request.setAttribute("searchType", searchType);
 		} else if("search".equals(action)){
-			if (StringUtil.isNotEmpty(s_dormManagerText)) {
+			if (StringUtil.isNotEmpty(sDormManagerText)) {
 				if ("name".equals(searchType)) {
-					dormManager.setName(s_dormManagerText);
+					dormManager.setName(sDormManagerText);
 				} else if ("userName".equals(searchType)) {
-					dormManager.setUserName(s_dormManagerText);
+					dormManager.setUserName(sDormManagerText);
 				}
 				session.setAttribute("searchType", searchType);
-				session.setAttribute("s_dormManagerText", s_dormManagerText);
+				session.setAttribute("s_dormManagerText", sDormManagerText);
 			} else {
 				session.removeAttribute("s_dormManagerText");
 				session.removeAttribute("searchType");
 			}
 		} else {
-			if(StringUtil.isNotEmpty(s_dormManagerText)) {
+			if(StringUtil.isNotEmpty(sDormManagerText)) {
 				if("name".equals(searchType)) {
-					dormManager.setName(s_dormManagerText);
+					dormManager.setName(sDormManagerText);
 				} else if("userName".equals(searchType)) {
-					dormManager.setUserName(s_dormManagerText);
+					dormManager.setUserName(sDormManagerText);
 				}
 				session.setAttribute("searchType", searchType);
-				session.setAttribute("s_dormManagerText", s_dormManagerText);
+				session.setAttribute("s_dormManagerText", sDormManagerText);
 			}
-			if(StringUtil.isEmpty(s_dormManagerText)) {
+			if(StringUtil.isEmpty(sDormManagerText)) {
 				Object o1 = session.getAttribute("s_dormManagerText");
 				Object o2 = session.getAttribute("searchType");
 				if(o1!=null) {
-					if("name".equals((String)o2)) {
+					if("name".equals(o2)) {
 						dormManager.setName((String)o1);
-					} else if("userName".equals((String)o2)) {
+					} else if("userName".equals(o2)) {
 						dormManager.setUserName((String)o1);
 					}
 				}
@@ -150,7 +150,7 @@ public class DormManagerServlet extends HttpServlet{
 	}
 
 	private void dormManagerSave(HttpServletRequest request,
-			HttpServletResponse response)throws ServletException, IOException {
+			HttpServletResponse response) {
 		String dormManagerId = request.getParameter("dormManagerId");
 		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
@@ -165,12 +165,12 @@ public class DormManagerServlet extends HttpServlet{
 		Connection con = null;
 		try {
 			con = dbUtil.getCon();
-			int saveNum = 0;
+			int saveNum;
 			if(StringUtil.isNotEmpty(dormManagerId)) {
 				saveNum = dormManagerDao.dormManagerUpdate(con, dormManager);
 			} else if(dormManagerDao.haveManagerByUser(con, dormManager.getUserName())){
 				request.setAttribute("dormManager", dormManager);
-				request.setAttribute("error", "���û����Ѵ���");
+				request.setAttribute("error", "该用户名已存在");
 				request.setAttribute("mainPage", "admin/dormManagerSave.jsp");
 				request.getRequestDispatcher("mainAdmin.jsp").forward(request, response);
 				try {
@@ -186,7 +186,7 @@ public class DormManagerServlet extends HttpServlet{
 				request.getRequestDispatcher("dormManager?action=list").forward(request, response);
 			} else {
 				request.setAttribute("dormManager", dormManager);
-				request.setAttribute("error", "����ʧ��");
+				request.setAttribute("error", "保存失败");
 				request.setAttribute("mainPage", "dormManager/dormManagerSave.jsp");
 				request.getRequestDispatcher("mainAdmin.jsp").forward(request, response);
 			}
@@ -229,29 +229,29 @@ public class DormManagerServlet extends HttpServlet{
 
 	private String genPagation(int totalNum, int currentPage, int pageSize){
 		int totalPage = totalNum%pageSize==0?totalNum/pageSize:totalNum/pageSize+1;
-		StringBuffer pageCode = new StringBuffer();
-		pageCode.append("<li><a href='dormManager?page=1'>��ҳ</a></li>");
+		StringBuilder pageCode = new StringBuilder();
+		pageCode.append("<li><a href='dormManager?page=1'>首页</a></li>");
 		if(currentPage==1) {
-			pageCode.append("<li class='disabled'><a href='#'>��һҳ</a></li>");
+			pageCode.append("<li class='disabled'><a href='#'>上一页</a></li>");
 		}else {
-			pageCode.append("<li><a href='dormManager?page="+(currentPage-1)+"'>��һҳ</a></li>");
+			pageCode.append("<li><a href='dormManager?page=").append(currentPage - 1).append("'>上一页</a></li>");
 		}
 		for(int i=currentPage-2;i<=currentPage+2;i++) {
 			if(i<1||i>totalPage) {
 				continue;
 			}
 			if(i==currentPage) {
-				pageCode.append("<li class='active'><a href='#'>"+i+"</a></li>");
+				pageCode.append("<li class='active'><a href='#'>").append(i).append("</a></li>");
 			} else {
-				pageCode.append("<li><a href='dormManager?page="+i+"'>"+i+"</a></li>");
+				pageCode.append("<li><a href='dormManager?page=").append(i).append("'>").append(i).append("</a></li>");
 			}
 		}
 		if(currentPage==totalPage) {
-			pageCode.append("<li class='disabled'><a href='#'>��һҳ</a></li>");
+			pageCode.append("<li class='disabled'><a href='#'>下一页</a></li>");
 		} else {
-			pageCode.append("<li><a href='dormManager?page="+(currentPage+1)+"'>��һҳ</a></li>");
+			pageCode.append("<li><a href='dormManager?page=").append(currentPage + 1).append("'>下一页</a></li>");
 		}
-		pageCode.append("<li><a href='dormManager?page="+totalPage+"'>βҳ</a></li>");
+		pageCode.append("<li><a href='dormManager?page=").append(totalPage).append("'>尾页</a></li>");
 		return pageCode.toString();
 	}
 	

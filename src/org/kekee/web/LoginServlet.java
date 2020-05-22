@@ -33,7 +33,7 @@ public class LoginServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+			throws IOException {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
 		String userName = request.getParameter("userName");
@@ -52,7 +52,7 @@ public class LoginServlet extends HttpServlet {
 				currentAdmin = userDao.Login(con, admin);
 				if(currentAdmin == null) {
 					request.setAttribute("admin", admin);
-					request.setAttribute("error", "�û������������");
+					request.setAttribute("error", "用户名或密码错误！");
 					request.getRequestDispatcher("login.jsp").forward(request, response);
 				} else {
 					if("remember-me".equals(remember)) {
@@ -70,7 +70,7 @@ public class LoginServlet extends HttpServlet {
 				currentDormManager = userDao.Login(con, dormManager);
 				if(currentDormManager == null) {
 					request.setAttribute("dormManager", dormManager);
-					request.setAttribute("error", "�û������������");
+					request.setAttribute("error", "用户名或密码错误！");
 					request.getRequestDispatcher("login.jsp").forward(request, response);
 				} else {
 					if("remember-me".equals(remember)) {
@@ -88,7 +88,7 @@ public class LoginServlet extends HttpServlet {
 				currentStudent = userDao.Login(con, student);
 				if(currentStudent == null) {
 					request.setAttribute("student", student);
-					request.setAttribute("error", "�û������������");
+					request.setAttribute("error", "用户名或密码错误！");
 					request.getRequestDispatcher("login.jsp").forward(request, response);
 				} else {
 					if("remember-me".equals(remember)) {
@@ -116,14 +116,14 @@ public class LoginServlet extends HttpServlet {
 
 	private void rememberMe(String userName, String password, String userType, HttpServletResponse response) {
 		Cookie user = new Cookie("dormuser", userName+"-"+password+"-"+userType+"-"+"yes");
-		user.setMaxAge(1*60*60*24*7);
+		user.setMaxAge(60 * 60 * 24 * 7);
 		response.addCookie(user);
 	}
 	
 	private void deleteCookie(String userName, HttpServletRequest request, HttpServletResponse response) {
 		Cookie[] cookies=request.getCookies();
 		for(int i=0;cookies!=null && i<cookies.length;i++){
-			if(cookies[i].getName().equals("dormuser")){
+			if("dormuser".equals(cookies[i].getName())){
 				if(userName.equals(userName=cookies[i].getValue().split("-")[0])) {
 					Cookie cookie = new Cookie(cookies[i].getName(), null);
 					cookie.setMaxAge(0);

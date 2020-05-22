@@ -12,13 +12,13 @@ import org.kekee.util.StringUtil;
 
 public class DormManagerDao {
 
-	public List<DormManager> dormManagerList(Connection con, PageBean pageBean, DormManager s_dormManager)throws Exception {
+	public List<DormManager> dormManagerList(Connection con, PageBean pageBean, DormManager sDormManager)throws Exception {
 		List<DormManager> dormManagerList = new ArrayList<>();
 		StringBuilder sb = new StringBuilder("SELECT * FROM (SELECT * FROM t_dormManager t1 ");
-		if(StringUtil.isNotEmpty(s_dormManager.getName())) {
-			sb.append(" where t1.name like '%").append(s_dormManager.getName()).append("%'");
-		} else if(StringUtil.isNotEmpty(s_dormManager.getUserName())) {
-			sb.append(" where t1.userName like '%").append(s_dormManager.getUserName()).append("%'");
+		if(StringUtil.isNotEmpty(sDormManager.getName())) {
+			sb.append(" where t1.name like '%").append(sDormManager.getName()).append("%'");
+		} else if(StringUtil.isNotEmpty(sDormManager.getUserName())) {
+			sb.append(" where t1.userName like '%").append(sDormManager.getUserName()).append("%'");
 		}
 		if(pageBean != null) {
 			sb.append(" limit ").append(pageBean.getStart()).append(",").append(pageBean.getPageSize());
@@ -42,12 +42,12 @@ public class DormManagerDao {
 		return dormManagerList;
 	}
 	
-	public int dormManagerCount(Connection con, DormManager s_dormManager)throws Exception {
+	public int dormManagerCount(Connection con, DormManager sDormManager)throws Exception {
 		StringBuilder sb = new StringBuilder("select count(*) as total from t_dormManager t1");
-		if(StringUtil.isNotEmpty(s_dormManager.getName())) {
-			sb.append(" where t1.name like '%").append(s_dormManager.getName()).append("%'");
-		} else if(StringUtil.isNotEmpty(s_dormManager.getUserName())) {
-			sb.append(" where t1.userName like '%").append(s_dormManager.getUserName()).append("%'");
+		if(StringUtil.isNotEmpty(sDormManager.getName())) {
+			sb.append(" where t1.name like '%").append(sDormManager.getName()).append("%'");
+		} else if(StringUtil.isNotEmpty(sDormManager.getUserName())) {
+			sb.append(" where t1.userName like '%").append(sDormManager.getUserName()).append("%'");
 		}
 		PreparedStatement pstmt = con.prepareStatement(sb.toString());
 		ResultSet rs = pstmt.executeQuery();

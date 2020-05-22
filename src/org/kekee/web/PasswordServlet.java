@@ -62,14 +62,14 @@ public class PasswordServlet extends HttpServlet{
 					request.setAttribute("oldPassword", oldPassword);
 					request.setAttribute("newPassword", newPassword);
 					request.setAttribute("rPassword", newPassword);
-					request.setAttribute("error", "�޸ĳɹ� ");
+					request.setAttribute("error", "两次密码不一致");
 					request.setAttribute("mainPage", "admin/passwordChange.jsp");
 					request.getRequestDispatcher("mainAdmin.jsp").forward(request, response);
 				} else {
 					request.setAttribute("oldPassword", oldPassword);
 					request.setAttribute("newPassword", newPassword);
 					request.setAttribute("rPassword", newPassword);
-					request.setAttribute("error", "ԭ�������");
+					request.setAttribute("error", "密码错误");
 					request.setAttribute("mainPage", "admin/passwordChange.jsp");
 					request.getRequestDispatcher("mainAdmin.jsp").forward(request, response);
 				}
@@ -81,14 +81,14 @@ public class PasswordServlet extends HttpServlet{
 					request.setAttribute("oldPassword", oldPassword);
 					request.setAttribute("newPassword", newPassword);
 					request.setAttribute("rPassword", newPassword);
-					request.setAttribute("error", "�޸ĳɹ� ");
+					request.setAttribute("error", "两次密码不一致");
 					request.setAttribute("mainPage", "dormManager/passwordChange.jsp");
 					request.getRequestDispatcher("mainManager.jsp").forward(request, response);
 				} else {
 					request.setAttribute("oldPassword", oldPassword);
 					request.setAttribute("newPassword", newPassword);
 					request.setAttribute("rPassword", newPassword);
-					request.setAttribute("error", "ԭ�������");
+					request.setAttribute("error", "密码错误");
 					request.setAttribute("mainPage", "dormManager/passwordChange.jsp");
 					request.getRequestDispatcher("mainManager.jsp").forward(request, response);
 				}
@@ -100,14 +100,14 @@ public class PasswordServlet extends HttpServlet{
 					request.setAttribute("oldPassword", oldPassword);
 					request.setAttribute("newPassword", newPassword);
 					request.setAttribute("rPassword", newPassword);
-					request.setAttribute("error", "�޸ĳɹ� ");
+					request.setAttribute("error", "两次密码不一致");
 					request.setAttribute("mainPage", "student/passwordChange.jsp");
 					request.getRequestDispatcher("mainStudent.jsp").forward(request, response);
 				} else {
 					request.setAttribute("oldPassword", oldPassword);
 					request.setAttribute("newPassword", newPassword);
 					request.setAttribute("rPassword", newPassword);
-					request.setAttribute("error", "ԭ�������");
+					request.setAttribute("error", "密码错误");
 					request.setAttribute("mainPage", "student/passwordChange.jsp");
 					request.getRequestDispatcher("mainStudent.jsp").forward(request, response);
 				}

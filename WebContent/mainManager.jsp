@@ -1,4 +1,3 @@
-<jsp:useBean id="currentUser" scope="request" type="sun.tools.jconsole.VMPanel"/>
 <%@ page contentType="text/html; charset=utf-8"
 		 pageEncoding="utf-8"%>
 <html lang="zh">

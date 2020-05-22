@@ -116,13 +116,13 @@ public class RecordServlet extends HttpServlet{
 		Connection con = null;
 		try {
 			con=dbUtil.getCon();
-			if("admin".equals((String)currentUserType)) {
+			if("admin".equals(currentUserType)) {
 				List<Record> recordList = recordDao.recordList(con, record);
 				request.setAttribute("dormBuildList", recordDao.dormBuildList(con));
 				request.setAttribute("recordList", recordList);
 				request.setAttribute("mainPage", "admin/record.jsp");
 				request.getRequestDispatcher("mainAdmin.jsp").forward(request, response);
-			} else if("dormManager".equals((String)currentUserType)) {
+			} else if("dormManager".equals(currentUserType)) {
 				DormManager manager = (DormManager)(session.getAttribute("currentUser"));
 				int buildId = manager.getDormBuildId();
 				String buildName = DormBuildDao.dormBuildName(con, buildId);
@@ -131,7 +131,7 @@ public class RecordServlet extends HttpServlet{
 				request.setAttribute("recordList", recordList);
 				request.setAttribute("mainPage", "dormManager/record.jsp");
 				request.getRequestDispatcher("mainManager.jsp").forward(request, response);
-			} else if("student".equals((String)currentUserType)) {
+			} else if("student".equals(currentUserType)) {
 				Student student = (Student)(session.getAttribute("currentUser"));
 				List<Record> recordList = recordDao.recordListWithNumber(con, record, student.getStuNumber());
 				request.setAttribute("recordList", recordList);
@@ -169,7 +169,7 @@ public class RecordServlet extends HttpServlet{
 	}
 
 	private void recordSave(HttpServletRequest request,
-			HttpServletResponse response)throws ServletException, IOException {
+			HttpServletResponse response) {
 		String recordId = request.getParameter("recordId");
 		String studentNumber = request.getParameter("studentNumber");
 		String date = request.getParameter("date");
@@ -183,14 +183,14 @@ public class RecordServlet extends HttpServlet{
 		Connection con = null;
 		try {
 			con = dbUtil.getCon();
-			int saveNum = 0;
+			int saveNum;
 			HttpSession session = request.getSession();
 			DormManager manager = (DormManager)(session.getAttribute("currentUser"));
 			int buildId = manager.getDormBuildId();
 			Student student = StudentDao.getNameById(con, studentNumber, buildId);
 			if(student.getName() == null) {
 				request.setAttribute("record", record);
-				request.setAttribute("error", "ѧ�Ų��������������¥��");
+				request.setAttribute("error", "学号不在您管理的宿舍楼内");
 				request.setAttribute("mainPage", "dormManager/recordSave.jsp");
 				request.getRequestDispatcher("mainManager.jsp").forward(request, response);
 			} else {
@@ -206,7 +206,7 @@ public class RecordServlet extends HttpServlet{
 					request.getRequestDispatcher("record?action=list").forward(request, response);
 				} else {
 					request.setAttribute("record", record);
-					request.setAttribute("error", "����ʧ��");
+					request.setAttribute("error", "保存失败");
 					request.setAttribute("mainPage", "dormManager/recordSave.jsp");
 					request.getRequestDispatcher("mainManager.jsp").forward(request, response);
 				}
@@ -251,66 +251,5 @@ public class RecordServlet extends HttpServlet{
 		request.setAttribute("mainPage", "dormManager/recordSave.jsp");
 		request.getRequestDispatcher("mainManager.jsp").forward(request, response);
 	}
-	/*else {
-	if("admin".equals((String)currentUserType)) {
-		if(StringUtil.isNotEmpty(s_studentText)) {
-			if("name".equals(searchType)) {
-				record.setStudentName(s_studentText);
-			} else if("number".equals(searchType)) {
-				record.setStudentNumber(s_studentText);
-			} else if("dorm".equals(searchType)) {
-				record.setDormName(s_studentText);
-			}
-			session.setAttribute("s_studentText", s_studentText);
-			session.setAttribute("searchType", searchType);
-		}
-		if(StringUtil.isNotEmpty(dormBuildId)) {
-			record.setDormBuildId(Integer.parseInt(dormBuildId));
-			session.setAttribute("buildToSelect", dormBuildId);
-		}
-		if(StringUtil.isEmpty(s_studentText) && StringUtil.isEmpty(dormBuildId)) {
-			Object o1 = session.getAttribute("s_studentText");
-			Object o2 = session.getAttribute("searchType");
-			Object o3 = session.getAttribute("buildToSelect");
-			if(o1!=null) {
-				if("name".equals((String)o2)) {
-					record.setStudentName((String)o1);
-				} else if("number".equals((String)o2)) {
-					record.setStudentNumber((String)o1);
-				} else if("dorm".equals((String)o2)) {
-					record.setDormName((String)o1);
-				}
-			}
-			if(o3 != null) {
-				record.setDormBuildId(Integer.parseInt((String)o3));
-			}
-		}
-	} else if("dormManager".equals((String)currentUserType)){
-		if(StringUtil.isNotEmpty(s_studentText)) {
-			if("name".equals(searchType)) {
-				record.setStudentName(s_studentText);
-			} else if("number".equals(searchType)) {
-				record.setStudentNumber(s_studentText);
-			} else if("dorm".equals(searchType)) {
-				record.setDormName(s_studentText);
-			}
-			session.setAttribute("s_studentText", s_studentText);
-			session.setAttribute("searchType", searchType);
-		}
-		if(StringUtil.isEmpty(s_studentText)) {
-			Object o1 = session.getAttribute("s_studentText");
-			Object o2 = session.getAttribute("searchType");
-			if(o1!=null) {
-				if("name".equals((String)o2)) {
-					record.setStudentName((String)o1);
-				} else if("number".equals((String)o2)) {
-					record.setStudentNumber((String)o1);
-				} else if("dorm".equals((String)o2)) {
-					record.setDormName((String)o1);
-				}
-			}
-		}
-	}
-}*/
-	
+
 }

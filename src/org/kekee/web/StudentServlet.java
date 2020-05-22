@@ -127,7 +127,7 @@ public class StudentServlet extends HttpServlet{
 						student.setDormBuildId(Integer.parseInt((String)o3));
 					}
 				}
-			} else if("dormManager".equals((String)currentUserType)) {
+			} else if("dormManager".equals(currentUserType)) {
 				if(StringUtil.isNotEmpty(s_studentText)) {
 					if("name".equals(searchType)) {
 						student.setName(s_studentText);
@@ -143,11 +143,11 @@ public class StudentServlet extends HttpServlet{
 					Object o1 = session.getAttribute("s_studentText");
 					Object o2 = session.getAttribute("searchType");
 					if(o1!=null) {
-						if("name".equals((String)o2)) {
+						if("name".equals(o2)) {
 							student.setName((String)o1);
-						} else if("number".equals((String)o2)) {
+						} else if("number".equals(o2)) {
 							student.setStuNumber((String)o1);
-						} else if("dorm".equals((String)o2)) {
+						} else if("dorm".equals(o2)) {
 							student.setDormName((String)o1);
 						}
 					}
@@ -225,7 +225,7 @@ public class StudentServlet extends HttpServlet{
 				saveNum = studentDao.studentUpdate(con, student);
 			} else if(studentDao.haveNameByNumber(con, student.getStuNumber())){
 				request.setAttribute("student", student);
-				request.setAttribute("error", "∏√—ß∫≈“—¥Ê‘⁄");
+				request.setAttribute("error", "ËØ•Â≠¶Âè∑Â∑≤Â≠òÂú®");
 				request.setAttribute("mainPage", "admin/studentSave.jsp");
 				request.getRequestDispatcher("mainAdmin.jsp").forward(request, response);
 				try {
@@ -241,7 +241,7 @@ public class StudentServlet extends HttpServlet{
 				request.getRequestDispatcher("student?action=list").forward(request, response);
 			} else {
 				request.setAttribute("student", student);
-				request.setAttribute("error", "±£¥Ê ß∞‹");
+				request.setAttribute("error", "‰øùÂ≠òÂ§±Ë¥•");
 				request.setAttribute("mainPage", "admin/studentSave.jsp");
 				request.getRequestDispatcher("mainAdmin.jsp").forward(request, response);
 			}

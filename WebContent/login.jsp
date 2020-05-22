@@ -146,13 +146,14 @@
 			<input id="student" type="radio" name="userType" value="student"  ${userType==3?'checked':''}/> 学生
 		</label>
         <label class="checkbox">
-          <input id="remember" name="remember" type="checkbox" value="remember-me" ${remember==1?'checked':''}>记住我 &nbsp;&nbsp;&nbsp;&nbsp; <font id="error" color="red">${error }</font>  
+          <input id="remember" name="remember" type="checkbox" value="remember-me" ${remember==1?'checked':''}>记住我 &nbsp;&nbsp;&nbsp;&nbsp; <span
+				id="error" style="color: red; ">${error }</span>
         </label>
         <button class="btn btn-large btn-primary" type="submit">登录</button>
         &nbsp;&nbsp;&nbsp;&nbsp;
         <button class="btn btn-large btn-primary" type="button" >重置</button>
 
-		<p align="center" style="padding-top: 15px;">版权所有  2014  Lero  <a href="http://www.lero.com" target="_blank">http://www.lero.com</a></p>
+		<p align="center" style="padding-top: 15px;">版权所有  2019  Kekee  <a href="http://www.kekee.com" target="_blank">http://www.kekee.com</a></p>
       </form>
 </div>
 </body>
