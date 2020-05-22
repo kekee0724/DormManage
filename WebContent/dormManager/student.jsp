@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
@@ -44,7 +44,7 @@ window.onload = function(){
 		</div>
 		<form name="myForm" class="form-search" method="post" action="student?action=search" style="padding-bottom: 0px">
 				<span class="data_search">
-					<span><font style="font-family: '黑体'; font-style: 'bold'; font-size: 20px" color="blue">${dormBuildName }&nbsp;&nbsp;</font></span>
+					<span><span style="font-family: '黑体'; font-style: 'bold'; font-size: 20px; color: blue; ">${dormBuildName }&nbsp;&nbsp;</span></span>
 					<select id="searchType" name="searchType" style="width: 80px;">
 					<option value="name">姓名</option>
 					<option value="number" ${searchType eq "number"?'selected':'' }>学号</option>

@@ -29,15 +29,15 @@
 				<input type="hidden" id="studentId" name="studentId" value="${student.studentId }"/>
 					<table align="center">
 						<tr>
-							<td><font color="red">*</font>原密码：</td>
+							<td><span style="color: red; ">*</span>原密码：</td>
 							<td><input type="password" id="oldPassword"  name="oldPassword" value="${oldPassword }"  style="margin-top:5px;height:30px;" /></td>
 						</tr>
 						<tr>
-							<td><font color="red">*</font>新密码：</td>
+							<td><span style="color: red; ">*</span>新密码：</td>
 							<td><input type="password" id="newPassword"  name="newPassword" value="${newPassword }" style="margin-top:5px;height:30px;" /></td>
 						</tr>
 						<tr>
-							<td><font color="red">*</font>重复密码：</td>
+							<td><span style="color: red; ">*</span>重复密码：</td>
 							<td><input type="password" id="rPassword"  name="rPassword" value="${rPassword }" style="margin-top:5px;height:30px;" /></td>
 						</tr>
 					</table>

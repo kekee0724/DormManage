@@ -66,7 +66,7 @@
     opacity: 0.5;
 }
 .bs-docs-sidenav .active .icon-chevron-right, .bs-docs-sidenav .active a:hover .icon-chevron-right {
-    background-image: url("../img/glyphicons-halflings-white.png");
+    background-image: url("./bootstrap/img/glyphicons-halflings-white.png");
     opacity: 1;
 }
 </style>

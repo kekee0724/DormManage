@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+<%@ page contentType="text/html; charset=utf-8"
+		 pageEncoding="utf-8"%>
 <%@ page import="org.kekee.model.Admin" %>
 <%@ page import="org.kekee.model.DormManager" %>
 <%@ page import="org.kekee.model.Student" %>
@@ -105,7 +105,7 @@
 
       .form-signin {
         max-width: 300px;
-        padding: 19px 29px 0px;
+        padding: 19px 29px 0;
         margin: 0 auto 20px;
         background-color: #fff;
         border: 1px solid #e5e5e5;
@@ -133,9 +133,9 @@
 <body>
 <div class="container">
       <form name="myForm" class="form-signin" action="login" method="post" onsubmit="return checkForm()">
-        <h2 class="form-signin-heading"><font color="gray">宿舍管理系统</font></h2>
-        <input id="userName" name="userName" value="${user.userName }" type="text" class="input-block-level" placeholder="用户名...">
-        <input id="password" name="password" value="${user.password }" type="password" class="input-block-level" placeholder="密码..." >
+        <h2 class="form-signin-heading"><span style="color: gray; ">宿舍管理系统</span></h2>
+		  <label for="userName"></label><input id="userName" name="userName" value="${user.userName }" type="text" class="input-block-level" placeholder="用户名...">
+		  <label for="password"></label><input id="password" name="password" value="${user.password }" type="password" class="input-block-level" placeholder="密码..." >
         <label class="radio inline">
       	  	<input id="admin" type="radio" name="userType" value="admin"  checked/> 系统管理员
 		</label>

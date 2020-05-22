@@ -4,10 +4,6 @@
 	<meta charset="utf-8">
 	<title>bootstrap datatable demo</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-	
-	
-	
 	<link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">

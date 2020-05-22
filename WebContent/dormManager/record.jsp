@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
@@ -61,7 +61,7 @@ window.onload = function(){
                     	<span class="add-on"><i class="icon-remove"></i></span>
 						<span class="add-on"><i class="icon-th"></i></span>
                		</span>
-					<span><font style="font-family: '黑体'; font-style: 'bold'; font-size: 20px" color="blue">${dormBuildName }&nbsp;&nbsp;</font></span>
+					<span><span style="font-family: '黑体'; font-style: 'bold'; font-size: 20px;color: blue; ">${dormBuildName }&nbsp;&nbsp;</span></span>
 					<select id="searchType" name="searchType" style="width: 80px;">
 					<option value="name">姓名</option>
 					<option value="number" ${searchType eq "number"?'selected':'' }>学号</option>

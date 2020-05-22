@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script type="text/javascript">
@@ -11,10 +11,10 @@
 		var name=document.getElementById("name").value;
 		var sex=document.getElementById("sex").value;
 		var tel=document.getElementById("tel").value;
-		if(userName==""||password==""||rPassword==""||name==""||sex==""||tel==""||dormBuildId==""||dormName==""){
+		if(userName===""||password===""||rPassword===""||name===""||sex===""||tel===""||dormBuildId===""||dormName===""){
 			document.getElementById("error").innerHTML="信息填写不完整！";
 			return false;
-		} else if(password!=rPassword){
+		} else if(password!==rPassword){
 			document.getElementById("error").innerHTML="密码填写不一致！";
 			return false;
 		}
