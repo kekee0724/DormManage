@@ -1,4 +1,4 @@
-package com.lero.dao;
+package org.kekee.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,59 +6,23 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.lero.model.DormBuild;
-import com.lero.model.Student;
-import com.lero.util.StringUtil;
+import org.kekee.model.DormBuild;
+import org.kekee.model.Student;
+import org.kekee.util.StringUtil;
 
 public class StudentDao {
-
-//	public List<Student> studentList(Connection con, PageBean pageBean, Student s_student)throws Exception {
-//		List<Student> studentList = new ArrayList<Student>();
-//		StringBuffer sb = new StringBuffer("select * from t_student t1");
-//		if(StringUtil.isNotEmpty(s_student.getName())) {
-//			sb.append(" and t1.name like '%"+s_student.getName()+"%'");
-//		} else if(StringUtil.isNotEmpty(s_student.getStuNumber())) {
-//			sb.append(" and t1.stuNum like '%"+s_student.getStuNumber()+"%'");
-//		} else if(StringUtil.isNotEmpty(s_student.getDormName())) {
-//			sb.append(" and t1.dormName like '%"+s_student.getDormName()+"%'");
-//		}
-//		if(s_student.getDormBuildId()!=0) {
-//			sb.append(" and t1.dormBuildId="+s_student.getDormBuildId());
-//		}
-//		if(pageBean != null) {
-//			sb.append(" limit "+pageBean.getStart()+","+pageBean.getPageSize());
-//		}
-//		PreparedStatement pstmt = con.prepareStatement(sb.toString().replaceFirst("and", "where"));
-//		ResultSet rs = pstmt.executeQuery();
-//		while(rs.next()) {
-//			Student student=new Student();
-//			student.setStudentId(rs.getInt("studentId"));
-//			int dormBuildId = rs.getInt("dormBuildId");
-//			student.setDormBuildId(dormBuildId);
-//			student.setDormBuildName(DormBuildDao.dormBuildName(con, dormBuildId));
-//			student.setDormName(rs.getString("dormName"));
-//			student.setName(rs.getString("name"));
-//			student.setSex(rs.getString("sex"));
-//			student.setStuNumber(rs.getString("stuNum"));
-//			student.setTel(rs.getString("tel"));
-//			student.setPassword(rs.getString("password"));
-//			studentList.add(student);
-//		}
-//		return studentList;
-//	}
-	
 	public List<Student> studentList(Connection con, Student s_student)throws Exception {
-		List<Student> studentList = new ArrayList<Student>();
-		StringBuffer sb = new StringBuffer("select * from t_student t1");
+		List<Student> studentList = new ArrayList<>();
+		StringBuilder sb = new StringBuilder("select * from t_student t1");
 		if(StringUtil.isNotEmpty(s_student.getName())) {
-			sb.append(" and t1.name like '%"+s_student.getName()+"%'");
+			sb.append(" and t1.name like '%").append(s_student.getName()).append("%'");
 		} else if(StringUtil.isNotEmpty(s_student.getStuNumber())) {
 			sb.append(" and t1.stuNum like '%"+s_student.getStuNumber()+"%'");
 		} else if(StringUtil.isNotEmpty(s_student.getDormName())) {
-			sb.append(" and t1.dormName like '%"+s_student.getDormName()+"%'");
+			sb.append(" and t1.dormName like '%").append(s_student.getDormName()).append("%'");
 		}
 		if(s_student.getDormBuildId()!=0) {
-			sb.append(" and t1.dormBuildId="+s_student.getDormBuildId());
+			sb.append(" and t1.dormBuildId=").append(s_student.getDormBuildId());
 		}
 		PreparedStatement pstmt = con.prepareStatement(sb.toString().replaceFirst("and", "where"));
 		ResultSet rs = pstmt.executeQuery();
@@ -110,16 +74,16 @@ public class StudentDao {
 	}
 	
 	public List<Student> studentListWithBuild(Connection con, Student s_student, int buildId)throws Exception {
-		List<Student> studentList = new ArrayList<Student>();
-		StringBuffer sb = new StringBuffer("select * from t_student t1");
+		List<Student> studentList = new ArrayList<>();
+		StringBuilder sb = new StringBuilder("select * from t_student t1");
 		if(StringUtil.isNotEmpty(s_student.getName())) {
-			sb.append(" and t1.name like '%"+s_student.getName()+"%'");
+			sb.append(" and t1.name like '%").append(s_student.getName()).append("%'");
 		} else if(StringUtil.isNotEmpty(s_student.getStuNumber())) {
-			sb.append(" and t1.stuNum like '%"+s_student.getStuNumber()+"%'");
+			sb.append(" and t1.stuNum like '%").append(s_student.getStuNumber()).append("%'");
 		} else if(StringUtil.isNotEmpty(s_student.getDormName())) {
-			sb.append(" and t1.dormName like '%"+s_student.getDormName()+"%'");
+			sb.append(" and t1.dormName like '%").append(s_student.getDormName()).append("%'");
 		}
-		sb.append(" and t1.dormBuildId="+buildId);
+		sb.append(" and t1.dormBuildId=").append(buildId);
 		PreparedStatement pstmt = con.prepareStatement(sb.toString().replaceFirst("and", "where"));
 		ResultSet rs = pstmt.executeQuery();
 		while(rs.next()) {
@@ -140,7 +104,7 @@ public class StudentDao {
 	}
 	
 	public List<DormBuild> dormBuildList(Connection con)throws Exception {
-		List<DormBuild> dormBuildList = new ArrayList<DormBuild>();
+		List<DormBuild> dormBuildList = new ArrayList<>();
 		String sql = "select * from t_dormBuild";
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		ResultSet rs = pstmt.executeQuery();
@@ -155,16 +119,16 @@ public class StudentDao {
 	}
 	
 	public int studentCount(Connection con, Student s_student)throws Exception {
-		StringBuffer sb = new StringBuffer("select count(*) as total from t_student t1");
+		StringBuilder sb = new StringBuilder("select count(*) as total from t_student t1");
 		if(StringUtil.isNotEmpty(s_student.getName())) {
-			sb.append(" and t1.name like '%"+s_student.getName()+"%'");
+			sb.append(" and t1.name like '%").append(s_student.getName()).append("%'");
 		} else if(StringUtil.isNotEmpty(s_student.getStuNumber())) {
-			sb.append(" and t1.stuNum like '%"+s_student.getStuNumber()+"%'");
+			sb.append(" and t1.stuNum like '%").append(s_student.getStuNumber()).append("%'");
 		} else if(StringUtil.isNotEmpty(s_student.getDormName())) {
-			sb.append(" and t1.dormName like '%"+s_student.getDormName()+"%'");
+			sb.append(" and t1.dormName like '%").append(s_student.getDormName()).append("%'");
 		}
 		if(s_student.getDormBuildId()!=0) {
-			sb.append(" and t1.dormBuildId="+s_student.getDormBuildId());
+			sb.append(" and t1.dormBuildId=").append(s_student.getDormBuildId());
 		}
 		PreparedStatement pstmt = con.prepareStatement(sb.toString().replaceFirst("and", "where"));
 		ResultSet rs = pstmt.executeQuery();

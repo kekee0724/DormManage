@@ -1,4 +1,4 @@
-package com.lero.util;
+package org.kekee.util;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,7 +8,7 @@ public class PropertiesUtil {
 	
 	public static String getValue(String key) {
 		Properties  prop = new Properties();
-		InputStream in = new PropertiesUtil().getClass().getResourceAsStream("/dorm.properties");
+		InputStream in = PropertiesUtil.class.getResourceAsStream("/dorm.properties");
 		try {
 			prop.load(in);
 		} catch (IOException e) {

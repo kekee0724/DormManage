@@ -1,4 +1,4 @@
-package com.lero.filter;
+package org.kekee.filter;
 
 import java.io.IOException;
 
@@ -35,7 +35,7 @@ public class LoginFilter implements Filter{
 	}
 
 	@Override
-	public void init(FilterConfig arg0) throws ServletException {
+	public void init(FilterConfig arg0) {
 		
 	}
 

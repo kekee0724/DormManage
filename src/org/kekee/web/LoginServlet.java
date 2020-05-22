@@ -1,4 +1,4 @@
-package com.lero.web;
+package org.kekee.web;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.lero.dao.UserDao;
-import com.lero.model.Admin;
-import com.lero.model.DormManager;
-import com.lero.model.Student;
-import com.lero.util.DbUtil;
+import org.kekee.dao.UserDao;
+import org.kekee.model.Admin;
+import org.kekee.model.DormManager;
+import org.kekee.model.Student;
+import org.kekee.util.DbUtil;
 
 /**
  * @author admin
@@ -52,7 +52,7 @@ public class LoginServlet extends HttpServlet {
 				currentAdmin = userDao.Login(con, admin);
 				if(currentAdmin == null) {
 					request.setAttribute("admin", admin);
-					request.setAttribute("error", "ÓÃ»§Ãû»òÃÜÂë´íÎó£¡");
+					request.setAttribute("error", "ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 					request.getRequestDispatcher("login.jsp").forward(request, response);
 				} else {
 					if("remember-me".equals(remember)) {
@@ -70,7 +70,7 @@ public class LoginServlet extends HttpServlet {
 				currentDormManager = userDao.Login(con, dormManager);
 				if(currentDormManager == null) {
 					request.setAttribute("dormManager", dormManager);
-					request.setAttribute("error", "ÓÃ»§Ãû»òÃÜÂë´íÎó£¡");
+					request.setAttribute("error", "ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 					request.getRequestDispatcher("login.jsp").forward(request, response);
 				} else {
 					if("remember-me".equals(remember)) {
@@ -88,7 +88,7 @@ public class LoginServlet extends HttpServlet {
 				currentStudent = userDao.Login(con, student);
 				if(currentStudent == null) {
 					request.setAttribute("student", student);
-					request.setAttribute("error", "ÓÃ»§Ãû»òÃÜÂë´íÎó£¡");
+					request.setAttribute("error", "ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 					request.getRequestDispatcher("login.jsp").forward(request, response);
 				} else {
 					if("remember-me".equals(remember)) {

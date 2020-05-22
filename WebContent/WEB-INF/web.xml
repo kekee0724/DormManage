@@ -7,7 +7,7 @@
   
   <filter>
   	<filter-name>loginFilter</filter-name>
-  	<filter-class>com.lero.filter.LoginFilter</filter-class>
+  	<filter-class>org.kekee.filter.LoginFilter</filter-class>
   </filter>
   
   <filter-mapping>
@@ -17,7 +17,7 @@
   
   <servlet>
   	<servlet-name>loginServlet</servlet-name>
-  	<servlet-class>com.lero.web.LoginServlet</servlet-class>
+  	<servlet-class>org.kekee.web.LoginServlet</servlet-class>
   </servlet>
   
   <servlet-mapping>
@@ -27,7 +27,7 @@
   
    <servlet>
   	<servlet-name>blankServlet</servlet-name>
-  	<servlet-class>com.lero.web.BlankServlet</servlet-class>
+  	<servlet-class>org.kekee.web.BlankServlet</servlet-class>
   </servlet>
   
   <servlet-mapping>
@@ -37,7 +37,7 @@
   
   <servlet>
   	<servlet-name>dormBuildServlet</servlet-name>
-  	<servlet-class>com.lero.web.DormBuildServlet</servlet-class>
+  	<servlet-class>org.kekee.web.DormBuildServlet</servlet-class>
   </servlet>
   
   <servlet-mapping>
@@ -47,7 +47,7 @@
   
    <servlet>
   	<servlet-name>dormManagerServlet</servlet-name>
-  	<servlet-class>com.lero.web.DormManagerServlet</servlet-class>
+  	<servlet-class>org.kekee.web.DormManagerServlet</servlet-class>
   </servlet>
   
   <servlet-mapping>
@@ -57,7 +57,7 @@
   
    <servlet>
   	<servlet-name>studentServlet</servlet-name>
-  	<servlet-class>com.lero.web.StudentServlet</servlet-class>
+  	<servlet-class>org.kekee.web.StudentServlet</servlet-class>
   </servlet>
   
   <servlet-mapping>
@@ -67,7 +67,7 @@
   
   <servlet>
   	<servlet-name>recordServlet</servlet-name>
-  	<servlet-class>com.lero.web.RecordServlet</servlet-class>
+  	<servlet-class>org.kekee.web.RecordServlet</servlet-class>
   </servlet>
   
   <servlet-mapping>
@@ -77,7 +77,7 @@
   
    <servlet>
   	<servlet-name>passwordServlet</servlet-name>
-  	<servlet-class>com.lero.web.PasswordServlet</servlet-class>
+  	<servlet-class>org.kekee.web.PasswordServlet</servlet-class>
   </servlet>
   
   <servlet-mapping>

@@ -1,4 +1,4 @@
-package com.lero.dao;
+package org.kekee.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,21 +6,21 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.lero.model.DormBuild;
-import com.lero.model.DormManager;
-import com.lero.model.PageBean;
-import com.lero.util.StringUtil;
+import org.kekee.model.DormBuild;
+import org.kekee.model.DormManager;
+import org.kekee.model.PageBean;
+import org.kekee.util.StringUtil;
 
 public class DormBuildDao {
 
 	public List<DormBuild> dormBuildList(Connection con, PageBean pageBean, DormBuild s_dormBuild)throws Exception {
-		List<DormBuild> dormBuildList = new ArrayList<DormBuild>();
-		StringBuffer sb = new StringBuffer("select * from t_dormBuild t1");
+		List<DormBuild> dormBuildList = new ArrayList<>();
+		StringBuilder sb = new StringBuilder("select * from t_dormBuild t1");
 		if(StringUtil.isNotEmpty(s_dormBuild.getDormBuildName())) {
-			sb.append(" where t1.dormBuildName like '%"+s_dormBuild.getDormBuildName()+"%'");
+			sb.append(" where t1.dormBuildName like '%").append(s_dormBuild.getDormBuildName()).append("%'");
 		}
 		if(pageBean != null) {
-			sb.append(" limit "+pageBean.getStart()+","+pageBean.getPageSize());
+			sb.append(" limit ").append(pageBean.getStart()).append(",").append(pageBean.getPageSize());
 		}
 		PreparedStatement pstmt = con.prepareStatement(sb.toString());
 		ResultSet rs = pstmt.executeQuery();
@@ -46,9 +46,9 @@ public class DormBuildDao {
 	}
 	
 	public int dormBuildCount(Connection con, DormBuild s_dormBuild)throws Exception {
-		StringBuffer sb = new StringBuffer("select count(*) as total from t_dormBuild t1");
+		StringBuilder sb = new StringBuilder("select count(*) as total from t_dormBuild t1");
 		if(StringUtil.isNotEmpty(s_dormBuild.getDormBuildName())) {
-			sb.append(" where t1.dormBuildName like '%"+s_dormBuild.getDormBuildName()+"%'");
+			sb.append(" where t1.dormBuildName like '%").append(s_dormBuild.getDormBuildName()).append("%'");
 		}
 		PreparedStatement pstmt = con.prepareStatement(sb.toString());
 		ResultSet rs = pstmt.executeQuery();
@@ -98,17 +98,13 @@ public class DormBuildDao {
 	}
 	
 	public boolean existManOrDormWithId(Connection con, String dormBuildId)throws Exception {
-		boolean isExist = false;
+		boolean isExist;
 //		String sql="select * from t_dormBuild,t_dormManager,t_connection where dormManId=managerId and dormBuildId=buildId and dormBuildId=?";
 		String sql = "select *from t_dormManager where dormBuildId=?";
 		PreparedStatement pstmt=con.prepareStatement(sql);
 		pstmt.setString(1, dormBuildId);
 		ResultSet rs = pstmt.executeQuery();
-		if(rs.next()) {
-			isExist = true;
-		} else {
-			isExist = false;
-		}
+		isExist = rs.next();
 		String sql1="select * from t_dormBuild t1,t_dorm t2 where t1.dormBuildId=t2.dormBuildId and t1.dormBuildId=?";
 		PreparedStatement p=con.prepareStatement(sql1);
 		p.setString(1, dormBuildId);
@@ -121,7 +117,7 @@ public class DormBuildDao {
 	}
 	
 	public List<DormManager> dormManWithoutBuild(Connection con)throws Exception {
-		List<DormManager> dormManagerList = new ArrayList<DormManager>();
+		List<DormManager> dormManagerList = new ArrayList<>();
 		String sql = "SELECT * FROM t_dormManager WHERE dormBuildId IS NULL OR dormBuildId=0";
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		ResultSet rs = pstmt.executeQuery();

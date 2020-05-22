@@ -1,4 +1,4 @@
-package com.lero.web;
+package org.kekee.web;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -12,14 +12,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.lero.dao.DormBuildDao;
-import com.lero.dao.RecordDao;
-import com.lero.dao.StudentDao;
-import com.lero.model.DormManager;
-import com.lero.model.Record;
-import com.lero.model.Student;
-import com.lero.util.DbUtil;
-import com.lero.util.StringUtil;
+import org.kekee.dao.DormBuildDao;
+import org.kekee.dao.RecordDao;
+import org.kekee.dao.StudentDao;
+import org.kekee.model.DormManager;
+import org.kekee.model.Record;
+import org.kekee.model.Student;
+import org.kekee.util.DbUtil;
+import org.kekee.util.StringUtil;
 
 public class RecordServlet extends HttpServlet{
 
@@ -190,7 +190,7 @@ public class RecordServlet extends HttpServlet{
 			Student student = StudentDao.getNameById(con, studentNumber, buildId);
 			if(student.getName() == null) {
 				request.setAttribute("record", record);
-				request.setAttribute("error", "Ñ§ºÅ²»ÔÚÄú¹ÜÀíµÄËÞÉáÂ¥ÄÚ");
+				request.setAttribute("error", "Ñ§ï¿½Å²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¥ï¿½ï¿½");
 				request.setAttribute("mainPage", "dormManager/recordSave.jsp");
 				request.getRequestDispatcher("mainManager.jsp").forward(request, response);
 			} else {
@@ -206,7 +206,7 @@ public class RecordServlet extends HttpServlet{
 					request.getRequestDispatcher("record?action=list").forward(request, response);
 				} else {
 					request.setAttribute("record", record);
-					request.setAttribute("error", "±£´æÊ§°Ü");
+					request.setAttribute("error", "ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 					request.setAttribute("mainPage", "dormManager/recordSave.jsp");
 					request.getRequestDispatcher("mainManager.jsp").forward(request, response);
 				}

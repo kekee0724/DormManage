@@ -1,14 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
-<%@ page import="com.lero.model.Admin" %>
-<%@ page import="com.lero.model.DormManager" %>
-<%@ page import="com.lero.model.Student" %>
+<jsp:useBean id="currentUser" scope="request" type="sun.tools.jconsole.VMPanel"/>
+<%@ page contentType="text/html; charset=utf-8"
+		 pageEncoding="utf-8"%>
 <html lang="zh">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>宿舍管理系统</title>
-<link href="${pageContext.request.contextPath}/style/dorm.css" rel="stylesheet">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>宿舍管理系统</title>
+	<link href="${pageContext.request.contextPath}/style/dorm.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
@@ -75,10 +73,12 @@
 
 </head>
 <body>
-<div class="container-fluid" style="padding-right: 0px;padding-left: 0px;">
+<div class="container-fluid" style="padding-right: 0;padding-left: 0;">
 	<div region="north" style="height: 100px;background-image: url('images/bg.jpg')">
-		<div align="left" style="width: 80%;height:100px ;float: left;padding-top: 40px;padding-left: 30px;" ><font color="white" size="6" >宿舍管理系统</font></div>
-		<div style="padding-top: 70px;padding-right: 20px;">当前用户：&nbsp;<font color="red" >${currentUser.userName }</font></div>
+		<div align="left" style="width: 80%;height:100px ;float: left;padding-top: 40px;padding-left: 30px;" ><span
+				style="color: white; font-size: x-large; ">宿舍管理系统</span></div>
+		<div style="padding-top: 70px;padding-right: 20px;">当前用户：&nbsp;<span
+				style="color: red; ">${currentUser.userName }</span></div>
 	</div>
 </div>
 	<div class="container-fluid">

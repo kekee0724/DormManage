@@ -1,12 +1,12 @@
-package com.lero.dao;
+package org.kekee.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import com.lero.model.Admin;
-import com.lero.model.DormManager;
-import com.lero.model.Student;
+import org.kekee.model.Admin;
+import org.kekee.model.DormManager;
+import org.kekee.model.Student;
 
 public class UserDao {
 

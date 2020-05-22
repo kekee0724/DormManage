@@ -1,4 +1,4 @@
-package com.lero.web;
+package org.kekee.web;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -10,12 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.lero.dao.DormBuildDao;
-import com.lero.dao.StudentDao;
-import com.lero.model.DormManager;
-import com.lero.model.Student;
-import com.lero.util.DbUtil;
-import com.lero.util.StringUtil;
+import org.kekee.dao.DormBuildDao;
+import org.kekee.dao.StudentDao;
+import org.kekee.model.DormManager;
+import org.kekee.model.Student;
+import org.kekee.util.DbUtil;
+import org.kekee.util.StringUtil;
 
 public class StudentServlet extends HttpServlet{
 
@@ -94,7 +94,7 @@ public class StudentServlet extends HttpServlet{
 				session.removeAttribute("buildToSelect");
 			}
 		} else {
-			if("admin".equals((String)currentUserType)) {
+			if("admin".equals(currentUserType)) {
 				if(StringUtil.isNotEmpty(s_studentText)) {
 					if("name".equals(searchType)) {
 						student.setName(s_studentText);
@@ -115,11 +115,11 @@ public class StudentServlet extends HttpServlet{
 					Object o2 = session.getAttribute("searchType");
 					Object o3 = session.getAttribute("buildToSelect");
 					if(o1!=null) {
-						if("name".equals((String)o2)) {
+						if("name".equals(o2)) {
 							student.setName((String)o1);
-						} else if("number".equals((String)o2)) {
+						} else if("number".equals(o2)) {
 							student.setStuNumber((String)o1);
-						} else if("dorm".equals((String)o2)) {
+						} else if("dorm".equals(o2)) {
 							student.setDormName((String)o1);
 						}
 					}
@@ -157,13 +157,13 @@ public class StudentServlet extends HttpServlet{
 		Connection con = null;
 		try {
 			con=dbUtil.getCon();
-			if("admin".equals((String)currentUserType)) {
+			if("admin".equals(currentUserType)) {
 				List<Student> studentList = studentDao.studentList(con, student);
 				request.setAttribute("dormBuildList", studentDao.dormBuildList(con));
 				request.setAttribute("studentList", studentList);
 				request.setAttribute("mainPage", "admin/student.jsp");
 				request.getRequestDispatcher("mainAdmin.jsp").forward(request, response);
-			} else if("dormManager".equals((String)currentUserType)) {
+			} else if("dormManager".equals(currentUserType)) {
 				DormManager manager = (DormManager)(session.getAttribute("currentUser"));
 				int buildId = manager.getDormBuildId();
 				String buildName = DormBuildDao.dormBuildName(con, buildId);
@@ -204,7 +204,7 @@ public class StudentServlet extends HttpServlet{
 	}
 
 	private void studentSave(HttpServletRequest request,
-			HttpServletResponse response)throws ServletException, IOException {
+			HttpServletResponse response) {
 		String studentId = request.getParameter("studentId");
 		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
@@ -220,7 +220,7 @@ public class StudentServlet extends HttpServlet{
 		Connection con = null;
 		try {
 			con = dbUtil.getCon();
-			int saveNum = 0;
+			int saveNum;
 			if(StringUtil.isNotEmpty(studentId)) {
 				saveNum = studentDao.studentUpdate(con, student);
 			} else if(studentDao.haveNameByNumber(con, student.getStuNumber())){

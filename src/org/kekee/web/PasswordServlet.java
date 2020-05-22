@@ -1,4 +1,4 @@
-package com.lero.web;
+package org.kekee.web;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -9,11 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.lero.dao.UserDao;
-import com.lero.model.Admin;
-import com.lero.model.DormManager;
-import com.lero.model.Student;
-import com.lero.util.DbUtil;
+import org.kekee.dao.UserDao;
+import org.kekee.model.Admin;
+import org.kekee.model.DormManager;
+import org.kekee.model.Student;
+import org.kekee.util.DbUtil;
 
 public class PasswordServlet extends HttpServlet{
 
@@ -39,15 +39,13 @@ public class PasswordServlet extends HttpServlet{
 		
 		if("preChange".equals(action)) {
 			passwordPreChange(request, response);
-			return;
 		} else if("change".equals(action)) {
 			passwordChange(request, response);
-			return;
 		}
 	}
 
 	private void passwordChange(HttpServletRequest request,
-			HttpServletResponse response)throws ServletException, IOException {
+			HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		Object currentUserType = session.getAttribute("currentUserType");
 		String oldPassword = request.getParameter("oldPassword");
@@ -56,7 +54,7 @@ public class PasswordServlet extends HttpServlet{
 		try {
 			con = dbUtil.getCon();
 			
-			if("admin".equals((String)currentUserType)) {
+			if("admin".equals(currentUserType)) {
 				Admin admin = (Admin)(session.getAttribute("currentUser"));
 				if(oldPassword.equals(admin.getPassword())) {
 					userDao.adminUpdate(con, admin.getAdminId(), newPassword);
@@ -64,18 +62,18 @@ public class PasswordServlet extends HttpServlet{
 					request.setAttribute("oldPassword", oldPassword);
 					request.setAttribute("newPassword", newPassword);
 					request.setAttribute("rPassword", newPassword);
-					request.setAttribute("error", "ÐÞ¸Ä³É¹¦ ");
+					request.setAttribute("error", "ï¿½Þ¸Ä³É¹ï¿½ ");
 					request.setAttribute("mainPage", "admin/passwordChange.jsp");
 					request.getRequestDispatcher("mainAdmin.jsp").forward(request, response);
 				} else {
 					request.setAttribute("oldPassword", oldPassword);
 					request.setAttribute("newPassword", newPassword);
 					request.setAttribute("rPassword", newPassword);
-					request.setAttribute("error", "Ô­ÃÜÂë´íÎó");
+					request.setAttribute("error", "Ô­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 					request.setAttribute("mainPage", "admin/passwordChange.jsp");
 					request.getRequestDispatcher("mainAdmin.jsp").forward(request, response);
 				}
-			} else if("dormManager".equals((String)currentUserType)) {
+			} else if("dormManager".equals(currentUserType)) {
 				DormManager manager = (DormManager)(session.getAttribute("currentUser"));
 				if(oldPassword.equals(manager.getPassword())) {
 					userDao.adminUpdate(con, manager.getDormManagerId(), newPassword);
@@ -83,18 +81,18 @@ public class PasswordServlet extends HttpServlet{
 					request.setAttribute("oldPassword", oldPassword);
 					request.setAttribute("newPassword", newPassword);
 					request.setAttribute("rPassword", newPassword);
-					request.setAttribute("error", "ÐÞ¸Ä³É¹¦ ");
+					request.setAttribute("error", "ï¿½Þ¸Ä³É¹ï¿½ ");
 					request.setAttribute("mainPage", "dormManager/passwordChange.jsp");
 					request.getRequestDispatcher("mainManager.jsp").forward(request, response);
 				} else {
 					request.setAttribute("oldPassword", oldPassword);
 					request.setAttribute("newPassword", newPassword);
 					request.setAttribute("rPassword", newPassword);
-					request.setAttribute("error", "Ô­ÃÜÂë´íÎó");
+					request.setAttribute("error", "Ô­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 					request.setAttribute("mainPage", "dormManager/passwordChange.jsp");
 					request.getRequestDispatcher("mainManager.jsp").forward(request, response);
 				}
-			} else if("student".equals((String)currentUserType)) {
+			} else if("student".equals(currentUserType)) {
 				Student student = (Student)(session.getAttribute("currentUser"));
 				if(oldPassword.equals(student.getPassword())) {
 					userDao.adminUpdate(con, student.getStudentId(), newPassword);
@@ -102,14 +100,14 @@ public class PasswordServlet extends HttpServlet{
 					request.setAttribute("oldPassword", oldPassword);
 					request.setAttribute("newPassword", newPassword);
 					request.setAttribute("rPassword", newPassword);
-					request.setAttribute("error", "ÐÞ¸Ä³É¹¦ ");
+					request.setAttribute("error", "ï¿½Þ¸Ä³É¹ï¿½ ");
 					request.setAttribute("mainPage", "student/passwordChange.jsp");
 					request.getRequestDispatcher("mainStudent.jsp").forward(request, response);
 				} else {
 					request.setAttribute("oldPassword", oldPassword);
 					request.setAttribute("newPassword", newPassword);
 					request.setAttribute("rPassword", newPassword);
-					request.setAttribute("error", "Ô­ÃÜÂë´íÎó");
+					request.setAttribute("error", "Ô­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 					request.setAttribute("mainPage", "student/passwordChange.jsp");
 					request.getRequestDispatcher("mainStudent.jsp").forward(request, response);
 				}
@@ -130,13 +128,13 @@ public class PasswordServlet extends HttpServlet{
 		
 		HttpSession session = request.getSession();
 		Object currentUserType = session.getAttribute("currentUserType");
-		if("admin".equals((String)currentUserType)) {
+		if("admin".equals(currentUserType)) {
 			request.setAttribute("mainPage", "admin/passwordChange.jsp");
 			request.getRequestDispatcher("mainAdmin.jsp").forward(request, response);
-		} else if("dormManager".equals((String)currentUserType)) {
+		} else if("dormManager".equals(currentUserType)) {
 			request.setAttribute("mainPage", "dormManager/passwordChange.jsp");
 			request.getRequestDispatcher("mainManager.jsp").forward(request, response);
-		} else if("student".equals((String)currentUserType)) {
+		} else if("student".equals(currentUserType)) {
 			request.setAttribute("mainPage", "student/passwordChange.jsp");
 			request.getRequestDispatcher("mainStudent.jsp").forward(request, response);
 		}

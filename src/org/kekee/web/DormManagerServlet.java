@@ -1,4 +1,4 @@
-package com.lero.web;
+package org.kekee.web;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -11,14 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.lero.dao.DormManagerDao;
-import com.lero.dao.StudentDao;
-import com.lero.model.DormBuild;
-import com.lero.model.DormManager;
-import com.lero.model.PageBean;
-import com.lero.util.DbUtil;
-import com.lero.util.PropertiesUtil;
-import com.lero.util.StringUtil;
+import org.kekee.dao.DormManagerDao;
+import org.kekee.dao.StudentDao;
+import org.kekee.model.DormBuild;
+import org.kekee.model.DormManager;
+import org.kekee.model.PageBean;
+import org.kekee.util.DbUtil;
+import org.kekee.util.PropertiesUtil;
+import org.kekee.util.StringUtil;
 
 public class DormManagerServlet extends HttpServlet{
 
@@ -170,7 +170,7 @@ public class DormManagerServlet extends HttpServlet{
 				saveNum = dormManagerDao.dormManagerUpdate(con, dormManager);
 			} else if(dormManagerDao.haveManagerByUser(con, dormManager.getUserName())){
 				request.setAttribute("dormManager", dormManager);
-				request.setAttribute("error", "¸ÃÓÃ»§ÃûÒÑ´æÔÚ");
+				request.setAttribute("error", "ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½ï¿½ï¿½");
 				request.setAttribute("mainPage", "admin/dormManagerSave.jsp");
 				request.getRequestDispatcher("mainAdmin.jsp").forward(request, response);
 				try {
@@ -186,7 +186,7 @@ public class DormManagerServlet extends HttpServlet{
 				request.getRequestDispatcher("dormManager?action=list").forward(request, response);
 			} else {
 				request.setAttribute("dormManager", dormManager);
-				request.setAttribute("error", "±£´æÊ§°Ü");
+				request.setAttribute("error", "ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 				request.setAttribute("mainPage", "dormManager/dormManagerSave.jsp");
 				request.getRequestDispatcher("mainAdmin.jsp").forward(request, response);
 			}
@@ -230,11 +230,11 @@ public class DormManagerServlet extends HttpServlet{
 	private String genPagation(int totalNum, int currentPage, int pageSize){
 		int totalPage = totalNum%pageSize==0?totalNum/pageSize:totalNum/pageSize+1;
 		StringBuffer pageCode = new StringBuffer();
-		pageCode.append("<li><a href='dormManager?page=1'>Ê×Ò³</a></li>");
+		pageCode.append("<li><a href='dormManager?page=1'>ï¿½ï¿½Ò³</a></li>");
 		if(currentPage==1) {
-			pageCode.append("<li class='disabled'><a href='#'>ÉÏÒ»Ò³</a></li>");
+			pageCode.append("<li class='disabled'><a href='#'>ï¿½ï¿½Ò»Ò³</a></li>");
 		}else {
-			pageCode.append("<li><a href='dormManager?page="+(currentPage-1)+"'>ÉÏÒ»Ò³</a></li>");
+			pageCode.append("<li><a href='dormManager?page="+(currentPage-1)+"'>ï¿½ï¿½Ò»Ò³</a></li>");
 		}
 		for(int i=currentPage-2;i<=currentPage+2;i++) {
 			if(i<1||i>totalPage) {
@@ -247,9 +247,9 @@ public class DormManagerServlet extends HttpServlet{
 			}
 		}
 		if(currentPage==totalPage) {
-			pageCode.append("<li class='disabled'><a href='#'>ÏÂÒ»Ò³</a></li>");
+			pageCode.append("<li class='disabled'><a href='#'>ï¿½ï¿½Ò»Ò³</a></li>");
 		} else {
-			pageCode.append("<li><a href='dormManager?page="+(currentPage+1)+"'>ÏÂÒ»Ò³</a></li>");
+			pageCode.append("<li><a href='dormManager?page="+(currentPage+1)+"'>ï¿½ï¿½Ò»Ò³</a></li>");
 		}
 		pageCode.append("<li><a href='dormManager?page="+totalPage+"'>Î²Ò³</a></li>");
 		return pageCode.toString();

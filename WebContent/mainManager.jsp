@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<%@ page import="com.lero.model.Admin" %>
-<%@ page import="com.lero.model.DormManager" %>
-<%@ page import="com.lero.model.Student" %>
+<%@ page import="org.kekee.model.Admin" %>
+<%@ page import="org.kekee.model.DormManager" %>
+<%@ page import="org.kekee.model.Student" %>
 <html lang="zh">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">

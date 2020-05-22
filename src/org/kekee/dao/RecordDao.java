@@ -1,4 +1,4 @@
-package com.lero.dao;
+package org.kekee.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,9 +6,9 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.lero.model.DormBuild;
-import com.lero.model.Record;
-import com.lero.util.StringUtil;
+import org.kekee.model.DormBuild;
+import org.kekee.model.Record;
+import org.kekee.util.StringUtil;
 
 public class RecordDao {
 	public List<Record> recordList(Connection con, Record s_record)throws Exception {

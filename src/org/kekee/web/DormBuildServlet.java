@@ -1,4 +1,4 @@
-package com.lero.web;
+package org.kekee.web;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -10,13 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.lero.dao.DormBuildDao;
-import com.lero.model.DormBuild;
-import com.lero.model.DormManager;
-import com.lero.model.PageBean;
-import com.lero.util.DbUtil;
-import com.lero.util.PropertiesUtil;
-import com.lero.util.StringUtil;
+import org.kekee.dao.DormBuildDao;
+import org.kekee.model.DormBuild;
+import org.kekee.model.DormManager;
+import org.kekee.model.PageBean;
+import org.kekee.util.DbUtil;
+import org.kekee.util.PropertiesUtil;
+import org.kekee.util.StringUtil;
 
 public class DormBuildServlet extends HttpServlet{
 
@@ -115,7 +115,7 @@ public class DormBuildServlet extends HttpServlet{
 			HttpServletResponse response) {
 		String dormBuildId = request.getParameter("dormBuildId");
 		String dormManagerId = request.getParameter("dormManagerId");
-		Connection con = null;
+		Connection con;
 		try {
 			con = dbUtil.getCon();
 			dormBuildDao.managerUpdateWithId(con, dormManagerId, "0");
@@ -129,7 +129,7 @@ public class DormBuildServlet extends HttpServlet{
 			HttpServletResponse response) {
 		String dormBuildId = request.getParameter("dormBuildId");
 		String dormManagerId = request.getParameter("dormManagerId");
-		Connection con = null;
+		Connection con;
 		try {
 			con = dbUtil.getCon();
 			dormBuildDao.managerUpdateWithId(con, dormManagerId, dormBuildId);
@@ -142,7 +142,7 @@ public class DormBuildServlet extends HttpServlet{
 	private void dormBuildManager(HttpServletRequest request,
 			HttpServletResponse response) {
 		String dormBuildId = request.getParameter("dormBuildId");
-		Connection con = null;
+		Connection con;
 		try {
 			con = dbUtil.getCon();
 			List<DormManager> managerListWithId = dormBuildDao.dormManWithBuildId(con, dormBuildId);
@@ -164,7 +164,7 @@ public class DormBuildServlet extends HttpServlet{
 		try {
 			con = dbUtil.getCon();
 			if(dormBuildDao.existManOrDormWithId(con, dormBuildId)) {
-				request.setAttribute("error", "ËÞÉáÂ¥ÏÂÓÐËÞÉá»òËÞ¹Ü£¬²»ÄÜÉ¾³ý¸ÃËÞÉáÂ¥");
+				request.setAttribute("error", "é”™è¯¯");
 			} else {
 				dormBuildDao.dormBuildDelete(con, dormBuildId);
 			}
@@ -202,7 +202,7 @@ public class DormBuildServlet extends HttpServlet{
 				request.getRequestDispatcher("dormBuild?action=list").forward(request, response);
 			} else {
 				request.setAttribute("dormBuild", dormBuild);
-				request.setAttribute("error", "±£´æÊ§°Ü");
+				request.setAttribute("error", "é”™è¯¯");
 				request.setAttribute("mainPage", "dormBuild/dormBuildSave.jsp");
 				request.getRequestDispatcher("mainAdmin.jsp").forward(request, response);
 			}
@@ -243,11 +243,11 @@ public class DormBuildServlet extends HttpServlet{
 	private String genPagation(int totalNum, int currentPage, int pageSize){
 		int totalPage = totalNum%pageSize==0?totalNum/pageSize:totalNum/pageSize+1;
 		StringBuffer pageCode = new StringBuffer();
-		pageCode.append("<li><a href='dormBuild?page=1'>Ê×Ò³</a></li>");
+		pageCode.append("<li><a href='dormBuild?page=1'>ï¿½ï¿½Ò³</a></li>");
 		if(currentPage==1) {
-			pageCode.append("<li class='disabled'><a href='#'>ÉÏÒ»Ò³</a></li>");
+			pageCode.append("<li class='disabled'><a href='#'>ï¿½ï¿½Ò»Ò³</a></li>");
 		}else {
-			pageCode.append("<li><a href='dormBuild?page="+(currentPage-1)+"'>ÉÏÒ»Ò³</a></li>");
+			pageCode.append("<li><a href='dormBuild?page="+(currentPage-1)+"'>ï¿½ï¿½Ò»Ò³</a></li>");
 		}
 		for(int i=currentPage-2;i<=currentPage+2;i++) {
 			if(i<1||i>totalPage) {
@@ -260,9 +260,9 @@ public class DormBuildServlet extends HttpServlet{
 			}
 		}
 		if(currentPage==totalPage) {
-			pageCode.append("<li class='disabled'><a href='#'>ÏÂÒ»Ò³</a></li>");
+			pageCode.append("<li class='disabled'><a href='#'>ï¿½ï¿½Ò»Ò³</a></li>");
 		} else {
-			pageCode.append("<li><a href='dormBuild?page="+(currentPage+1)+"'>ÏÂÒ»Ò³</a></li>");
+			pageCode.append("<li><a href='dormBuild?page="+(currentPage+1)+"'>ï¿½ï¿½Ò»Ò³</a></li>");
 		}
 		pageCode.append("<li><a href='dormBuild?page="+totalPage+"'>Î²Ò³</a></li>");
 		return pageCode.toString();

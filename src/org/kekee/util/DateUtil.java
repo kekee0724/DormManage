@@ -1,4 +1,4 @@
-package com.lero.util;
+package org.kekee.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

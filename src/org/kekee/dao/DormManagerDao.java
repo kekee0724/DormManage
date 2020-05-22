@@ -1,4 +1,4 @@
-package com.lero.dao;
+package org.kekee.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,22 +6,22 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.lero.model.DormManager;
-import com.lero.model.PageBean;
-import com.lero.util.StringUtil;
+import org.kekee.model.DormManager;
+import org.kekee.model.PageBean;
+import org.kekee.util.StringUtil;
 
 public class DormManagerDao {
 
 	public List<DormManager> dormManagerList(Connection con, PageBean pageBean, DormManager s_dormManager)throws Exception {
-		List<DormManager> dormManagerList = new ArrayList<DormManager>();
-		StringBuffer sb = new StringBuffer("SELECT * FROM (SELECT * FROM t_dormManager t1 ");
+		List<DormManager> dormManagerList = new ArrayList<>();
+		StringBuilder sb = new StringBuilder("SELECT * FROM (SELECT * FROM t_dormManager t1 ");
 		if(StringUtil.isNotEmpty(s_dormManager.getName())) {
-			sb.append(" where t1.name like '%"+s_dormManager.getName()+"%'");
+			sb.append(" where t1.name like '%").append(s_dormManager.getName()).append("%'");
 		} else if(StringUtil.isNotEmpty(s_dormManager.getUserName())) {
-			sb.append(" where t1.userName like '%"+s_dormManager.getUserName()+"%'");
+			sb.append(" where t1.userName like '%").append(s_dormManager.getUserName()).append("%'");
 		}
 		if(pageBean != null) {
-			sb.append(" limit "+pageBean.getStart()+","+pageBean.getPageSize());
+			sb.append(" limit ").append(pageBean.getStart()).append(",").append(pageBean.getPageSize());
 		}
 		sb.append(") user ORDER BY userName");
 		PreparedStatement pstmt = con.prepareStatement(sb.toString());
@@ -43,11 +43,11 @@ public class DormManagerDao {
 	}
 	
 	public int dormManagerCount(Connection con, DormManager s_dormManager)throws Exception {
-		StringBuffer sb = new StringBuffer("select count(*) as total from t_dormManager t1");
+		StringBuilder sb = new StringBuilder("select count(*) as total from t_dormManager t1");
 		if(StringUtil.isNotEmpty(s_dormManager.getName())) {
-			sb.append(" where t1.name like '%"+s_dormManager.getName()+"%'");
+			sb.append(" where t1.name like '%").append(s_dormManager.getName()).append("%'");
 		} else if(StringUtil.isNotEmpty(s_dormManager.getUserName())) {
-			sb.append(" where t1.userName like '%"+s_dormManager.getUserName()+"%'");
+			sb.append(" where t1.userName like '%").append(s_dormManager.getUserName()).append("%'");
 		}
 		PreparedStatement pstmt = con.prepareStatement(sb.toString());
 		ResultSet rs = pstmt.executeQuery();
@@ -113,10 +113,7 @@ public class DormManagerDao {
 		PreparedStatement pstmt=con.prepareStatement(sql);
 		pstmt.setString(1, userName);
 		ResultSet rs=pstmt.executeQuery();
-		if(rs.next()) {
-			return true;
-		}
-		return false;
+		return rs.next();
 	}
 	
 	
